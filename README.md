@@ -27,9 +27,9 @@ Skip 1-4 if you don't want to write the KPIs to a spreadsheet.
 
 1. Create a new Spreadsheet and add the following columns
    > Date, Outdated Patches, Outdated Minor, Outdated Major, Security Issues Info, Security Issues Low, Security Issues Moderate, Security Issues High, Security Issues Critical
-2. Enable Google Sheets API and get your credentials: https://console.developers.google.com/apis/credentials
+2. Enable Google Sheets API and create an OAuth2 key: https://console.developers.google.com/apis/credentials
 3. Fetch the executeable from the releases
-4. Download `credentials.json` and put it in the folder of the executeable
+4. Download the credentials, name the file `credentials.json` and put it in the folder of the executeable
 5. Ensure the binaries are installed and in the projects folder
 6. Run the script with the arguments below 
 
@@ -56,4 +56,12 @@ For the first run uploading to a spreadsheet Google might ask you to open a brow
 
 Run `pyinstaller --onefile -n dependency-scan main.py`. This will build the executeable for your machine.
 For more info please read the info on [PyInstaller](https://www.pyinstaller.org/).
+
+## Troubleshooting
+
+> UserWarning: Cannot access token.json: No such file or directory
+
+Please create an empty `token.json` file in the folder of the executable.
+
+
 
