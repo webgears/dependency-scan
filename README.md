@@ -2,6 +2,19 @@
 
 This project runs `yarn audit`, `yarn outdated`, `composer outdated` and `php security-checker.phar` and uploads the KPIs to a Google Spreadsheet.
 
+## KPIs
+
+Using yarn and composer this tool checks for the following KPIs:
+
+- Outdated Patches: Number of dependencies where patch version differs from the latest version
+- Outdated Minor: Number of dependencies where minor version differs from the latest version
+- Outdated Major: Number of dependencies where major version differs from the latest version
+- Security Issues Info: Number of security issues with a info level
+- Security Issues Low: Number of security issues with a low level
+- Security Issues Moderate: Number of security issues with a moderate level
+- Security Issues High: Number of security issues with a high level
+- Security Issues Critical: Number of security issues with a critical level
+
 ## Project Setup
 
 Make sure you have [Pipenv](https://pipenv.readthedocs.io/en/latest/) installed.
