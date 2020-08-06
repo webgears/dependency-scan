@@ -22,9 +22,14 @@ class SecurityParser:
 
     @staticmethod
     def __parse_audit(audit):
-        summary = audit.splitlines()[-1]
-        parsed_json = json.loads(summary)
+        try:
+            parsed_json = json.loads(audit)
 
-        # As there is no error level, we mark them all as high
-        return (0, 0, 0, len(parsed_json.keys()), 0)
+            # As there is no error level, we mark them all as high
+            return (0, 0, 0, len(parsed_json.keys()), 0)
+        except json.decoder.JSONDecodeError as e:
+            print("JSON Decode error: {0}".format(e))
+            print(audit)
+        
+        return (0, 0, 0, 0, 0)
         

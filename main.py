@@ -27,7 +27,7 @@ ap.add_argument("-y", "--yarn-audit", required=False, help="Run yarn audit", act
 ap.add_argument("-c", "--composer-audit", required=False, help="Run composer audit", action="store_true")
 ap.add_argument("--yarn-bin", required=False, help="Path to yarn binary", default="yarn")
 ap.add_argument("--composer-bin", required=False, help="Path to composer binary", default="composer")
-ap.add_argument("--security-checker-bin", required=False, help="Path to sensiolabs security checker binary", default="php security-checker.phar")
+ap.add_argument("--symfony-bin", required=False, help="Path to symfony CLI binary", default="symfony")
 args = vars(ap.parse_args())
 
 def main():
@@ -43,7 +43,7 @@ def main():
     
     if args['composer_audit']:
         outdated_parser = ComposerOutdatedParser(args['composer_bin'], args['project'])
-        security_parser = ComposerSecurityParser(args['security_checker_bin'], args['project'])
+        security_parser = ComposerSecurityParser(args['symfony_bin'], args['project'])
         outdated = add_tuples(outdated, outdated_parser.gather_data())
         security_issues = add_tuples(security_issues, security_parser.gather_data())
 

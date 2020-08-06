@@ -1,6 +1,6 @@
 # Dependency Scan
 
-This project runs `yarn audit`, `yarn outdated`, `composer outdated` and `php security-checker.phar` and uploads the KPIs to a Google Spreadsheet.
+This project runs `yarn audit`, `yarn outdated`, `composer outdated` and `symfony security:check` and uploads the KPIs to a Google Spreadsheet.
 
 ## KPIs
 
@@ -39,6 +39,30 @@ For the first run uploading to a spreadsheet Google might ask you to open a brow
 ./dependency-scan -i <SPREADSHEET_ID> -s <SHEET_NAME> -p <path> -y -c
 ```
 
+### Docker
+
+To use the docker container `wbgrs/dependency-scan` run the following command and add the parameters you need.
+
+```
+docker run \
+   --mount type=bind,source="$(pwd)"/,target=/app \
+   wbgrs/dependency-scan \
+   pipenv run python main.py -p /app
+
+
+docker run \
+   --mount type=bind,source="$(pwd)"/,target=/app \
+   --mount type=bind,source="$(pwd)"/credentials.json,target=/script/credentials.json \
+   --mount type=bind,source="$(pwd)"/token.json,target=/script/token.json \
+   wbgrs/dependency-scan \
+   pipenv run python main.py -p /app -c -i 1B6g9dHOkAyBfSZOHQFO2NSgcbpH39LC0exaDEZguTYs -s 'Coupon Frontend Composer'
+```
+
+#### Build the Docker Container
+
+1. Run `docker build -t wbgrs/dependency-scan .` 
+2. Push it via `docker push wbgrs/dependency-scan`
+
 ### Arguments
 
 ```
@@ -49,7 +73,7 @@ For the first run uploading to a spreadsheet Google might ask you to open a brow
 -c|--composer-audit         Run composer audit (Optional)
 --yarn-bin                  Path to yarn binary (Optional, defaults to "yarn")
 --composer-bin              Path to composer binary (Optional, defaults to "composer")
---security-checker-bin      Path to sensiolabs security checker binary (Optional, defaults to "php security-checker.phar")
+--symfony-bin      Path to symfony CLI binary (Optional, defaults to "symfony")
 ```
 
 ## Build
