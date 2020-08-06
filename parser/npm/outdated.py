@@ -4,8 +4,8 @@ import subprocess
 import json
 
 class OutdatedParser:
-    def __init__(self, yarn_binary, project_folder):
-        self.yarn_binary = yarn_binary
+    def __init__(self, npm_binary, project_folder):
+        self.npm_binary = npm_binary
         self.project_folder = project_folder
 
     def gather_data(self):
@@ -16,11 +16,10 @@ class OutdatedParser:
 
 
     def __run_check(self):
-        process = subprocess.Popen(self.yarn_binary + ' outdated --no-progress --non-interactive --json', cwd=self.project_folder, shell=True, stdout=subprocess.PIPE)
+        process = subprocess.Popen(self.npm_binary + ' outdated --no-progress --non-interactive --json', cwd=self.project_folder, shell=True, stdout=subprocess.PIPE)
         out, err = process.communicate()
 
         out = out.decode('utf-8')
-        out = out.split("\n")[1]
 
         return out
 
@@ -33,9 +32,9 @@ class OutdatedParser:
             minor = 0
             major = 0
 
-            for element in parsed_json['data']['body']:
-                current = element[1].split('.')
-                latest = element[3].split('.')
+            for _, value in parsed_json.items():
+                current = value['current'].split('.') if 'current' in value else [0,0,0]
+                latest = value['latest'].split('.')
 
                 if current[0] != latest[0]:
                     major+=1
@@ -45,10 +44,8 @@ class OutdatedParser:
                     patches+=1
 
             return (patches, minor, major)
-
         except json.decoder.JSONDecodeError as e:
             print("JSON Decode error: {0}".format(e))
             print(outdated)
             raise e
-
         

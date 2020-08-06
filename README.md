@@ -1,6 +1,6 @@
 # Dependency Scan
 
-This project runs `yarn audit`, `yarn outdated`, `composer outdated` and `symfony security:check` and uploads the KPIs to a Google Spreadsheet.
+This project runs `yarn|npm audit`, `yarn|npm outdated`, `composer outdated` and `symfony security:check` and uploads the KPIs to a Google Spreadsheet.
 
 ## KPIs
 
@@ -64,8 +64,10 @@ docker run \
 -s|--sheet <NAME>           Sheet Name to add the data to (Optional, omit if you don't want to send it to Google Spreedsheet)
 -p|--project <Path>         Project Folder to check (Optional)
 -y|--yarn-audit             Run yarn audit (Optional)
+-n|--npm-audit              Run npm audit (Optional)
 -c|--composer-audit         Run composer audit (Optional)
 --yarn-bin                  Path to yarn binary (Optional, defaults to "yarn")
+--npm-bin                   Path to npm binary (Optional, defaults to "npm")
 --composer-bin              Path to composer binary (Optional, defaults to "composer")
 --symfony-bin      Path to symfony CLI binary (Optional, defaults to "symfony")
 ```

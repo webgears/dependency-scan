@@ -30,6 +30,4 @@ class SecurityParser:
         except json.decoder.JSONDecodeError as e:
             print("JSON Decode error: {0}".format(e))
             print(audit)
-        
-        return (0, 0, 0, 0, 0)
-        
+            raise e

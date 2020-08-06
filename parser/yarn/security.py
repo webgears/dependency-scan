@@ -22,16 +22,22 @@ class SecurityParser:
 
     @staticmethod
     def __parse_audit(audit):
-        summary = audit.splitlines()[-1]
-        parsed_json = json.loads(summary)
+        try:
+            summary = audit.splitlines()[-1]
+            parsed_json = json.loads(summary)
 
-        if(parsed_json['type'] != "auditSummary"):
-            raise Exception('Could not fetch summary')
+            if(parsed_json['type'] != "auditSummary"):
+                raise Exception('Could not fetch summary')
 
-        return (parsed_json['data']['vulnerabilities']['info'], 
-            parsed_json['data']['vulnerabilities']['low'], 
-            parsed_json['data']['vulnerabilities']['moderate'], 
-            parsed_json['data']['vulnerabilities']['high'], 
-            parsed_json['data']['vulnerabilities']['critical']
-            )
+            return (parsed_json['data']['vulnerabilities']['info'], 
+                parsed_json['data']['vulnerabilities']['low'], 
+                parsed_json['data']['vulnerabilities']['moderate'], 
+                parsed_json['data']['vulnerabilities']['high'], 
+                parsed_json['data']['vulnerabilities']['critical']
+                )
+
+        except json.decoder.JSONDecodeError as e:
+            print("JSON Decode error: {0}".format(e))
+            print(audit)
+            raise e
         
