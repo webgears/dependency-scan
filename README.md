@@ -46,16 +46,10 @@ To use the docker container `wbgrs/dependency-scan` run the following command an
 ```
 docker run \
    --mount type=bind,source="$(pwd)"/,target=/app \
-   wbgrs/dependency-scan \
-   pipenv run python main.py -p /app
-
-
-docker run \
-   --mount type=bind,source="$(pwd)"/,target=/app \
    --mount type=bind,source="$(pwd)"/credentials.json,target=/script/credentials.json \
    --mount type=bind,source="$(pwd)"/token.json,target=/script/token.json \
    wbgrs/dependency-scan \
-   pipenv run python main.py -p /app -c -i 1B6g9dHOkAyBfSZOHQFO2NSgcbpH39LC0exaDEZguTYs -s 'Coupon Frontend Composer'
+   pipenv run python main.py -p /app
 ```
 
 #### Build the Docker Container
