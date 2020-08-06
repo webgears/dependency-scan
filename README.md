@@ -19,7 +19,7 @@ Using yarn and composer this tool checks for the following KPIs:
 
 Make sure you have [Pipenv](https://pipenv.readthedocs.io/en/latest/) installed.
 
-Then run `pipenv install`. To execute the `main.py` script you can either run `pipenv run python main.py` or run `python shell` to load the pipenv environment into your shell.
+Then run `pipenv install`. To execute the `main.py` script you can either run `pipenv run python main.py` or run `pipenv shell` to load the pipenv environment into your shell.
 
 ## Usage
 
