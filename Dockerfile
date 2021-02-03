@@ -1,4 +1,4 @@
-FROM wbgrs/php:7.2-python
+FROM wbgrs/php:7.4-python
 
 WORKDIR /script
 
