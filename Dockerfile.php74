@@ -8,9 +8,14 @@ ADD parser /script/parser
 ADD Pipfile /script/
 ADD Pipfile.lock /script/
 
-RUN apt-get install python3-distutils
+RUN apt-get update && apt-get install -y python3-pip
+RUN pip3 install pipenv
 
-RUN pipenv install
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ENV LC_CTYPE=en_US.UTF-8
+
+RUN pipenv install --deploy --verbose
 
 RUN wget https://get.symfony.com/cli/installer -O - | bash && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
