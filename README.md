@@ -54,7 +54,7 @@ docker run \
 
 #### Build the Docker Container
 
-1. Run `docker build -t wbgrs/dependency-scan .` 
+1. Run with PHP7.2 `docker build -t wbgrs/dependency-scan .` or with PHP7.4 `docker build -f Dockerfile.php74 -t wbgrs/dependency-scan .`
 2. Push it via `docker push wbgrs/dependency-scan`
 
 ### Arguments
